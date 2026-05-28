@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Restaurante - Órdenes y Reservaciones</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .card:hover { transform: translateY(-5px); transition: 0.3s; }
+        .alert { position: fixed; top: 20px; right: 20px; z-index: 9999; min-width: 300px; }
+        .logo-img { max-height: 80px; width: auto; }
+        .navbar-brand { font-size: 1.5rem; font-weight: bold; }
+    </style>
+</head>
+<body class="bg-light">
+
+<div class="container py-4">
+    <!-- Logo y título -->
+    <div class="text-center mb-4">
+    <div style="font-size: 80px;">🌮🍕🥤</div>
+    <h1 class="display-5 mt-2">Lonchería "Don Jugos"</h1>
+    <p class="lead">Órdenes y Reservaciones en Línea</p>
+</div>
+    
+    <!-- Pestañas (SIN la de inversiones) -->
+    <ul class="nav nav-tabs mb-4 justify-content-center" id="myTab" role="tablist">
+        <li class="nav-item">
+            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#ordenes">🛍️ Hacer Pedido</button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#reservaciones">📅 Reservar Mesa</button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#opiniones">⭐ Dejar Opinión</button>
+        </li>
+    </ul>
+    
+    <div class="tab-content">
+        <!-- ========== PESTAÑA ÓRDENES (con especificaciones) ========== -->
+        <div class="tab-pane fade show active" id="ordenes">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h3>Realizar Pedido</h3>
+                    <form id="formOrden">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label>Nombre del Cliente *</label>
+                                <input type="text" id="clienteOrden" class="form-control" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label>Producto *</label>
+                                <select id="producto" class="form-control" required>
+                                    <option value="Jugos">🥤 Jugos - $30</option>
+                                    <option value="Licuado">🥤 Licuado - $30</option>
+                                    <option value="Cócteles de fruta">🍹 Cócteles de fruta - $35</option>
+                                    <option value="Tortas">🥪 Tortas - $45</option>
+                                    <option value="Tortas a la plancha">🔥 Tortas a la plancha - $50</option>
+                                    <option value="Tacos dorados">🌮 Tacos dorados - $30</option>
+                                    <option value="Tacos al vapor">💨 Tacos al vapor - $35</option>
+                                    <option value="Burritos">🌯 Burritos - $35</option>
+                                    <option value="Quesadillas">🧀 Quesadillas - $30</option>
+                                    <option value="Hamburguesas">🍔 Hamburguesas - $50</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label>Cantidad *</label>
+                                <input type="number" id="cantidad" class="form-control" required min="1">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label>Total a Pagar ($)</label>
+                                <input type="number" id="total" class="form-control" readonly>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label>📝 Especificaciones del pedido (sin cebolla, bien cocido, en el caso de bebidas especifica el sabor deseado etc.)</label>
+                                <textarea id="especificaciones" class="form-control" rows="2" placeholder="Ej: Sin cebolla, extra salsa, bien cocido..."></textarea>
+                                <small class="text-muted">Opcional: Escribe instrucciones especiales para tu pedido</small>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg w-100">✅ Realizar Pedido</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ========== PESTAÑA RESERVACIONES ========== -->
+        <div class="tab-pane fade" id="reservaciones">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h3>Reservar Mesa</h3>
+                    <form id="formReserva">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label>Nombre del Cliente *</label>
+                                <input type="text" id="clienteReserva" class="form-control" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label>Teléfono *</label>
+                                <input type="tel" id="telefono" class="form-control" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label>Fecha *</label>
+                                <input type="date" id="fechaReserva" class="form-control" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label>Hora *</label>
+                                <input type="time" id="horaReserva" class="form-control" required>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label>Número de Personas *</label>
+                                <input type="number" id="personas" class="form-control" required min="1" max="20">
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label>📝 Solicitudes especiales (opcional)</label>
+                                <textarea id="notasReserva" class="form-control" rows="2" placeholder="Ej: Mesa cerca de la ventana, silla para bebé..."></textarea>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-lg w-100">📅 Reservar Ahora</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ========== PESTAÑA OPINIONES ========== -->
+        <div class="tab-pane fade" id="opiniones">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h3>Dejar tu Opinión</h3>
+                    <form id="formOpinion">
+                        <div class="mb-3">
+                            <label>Nombre del Cliente *</label>
+                            <input type="text" id="clienteOpinion" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label>Puntaje *</label>
+                            <select id="puntaje" class="form-control">
+                                <option value="5">⭐⭐⭐⭐⭐ - Excelente (5)</option>
+                                <option value="4">⭐⭐⭐⭐ - Bueno (4)</option>
+                                <option value="3">⭐⭐⭐ - Regular (3)</option>
+                                <option value="2">⭐⭐ - Malo (2)</option>
+                                <option value="1">⭐ - Pésimo (1)</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label>Comentario *</label>
+                            <textarea id="comentario" class="form-control" rows="3" required placeholder="Cuéntanos tu experiencia..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-warning btn-lg w-100">⭐ Enviar Opinión</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 🔴 REEMPLAZA ESTA URL CON LA TUYA 🔴
+    const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbzcJsaXKxKvIpZRUa9htbdJAHze_P1VgYBSe9CSk9YqISQYXi0D9b51iwKfuAbzLLy5/exec";
+    
+    // Precios de productos
+    const precios = {
+        "Jugos": 30,
+        "Licuado": 30,
+        "Cócteles de fruta": 35,
+        "Tortas": 45,
+        "Tortas a la plancha": 50,
+        "Tacos dorados": 30,
+        "Tacos al vapor": 35,
+        "Burritos": 35,
+        "Quesadillas": 30,
+        "Hamburguesas": 50
+    };
+    
+    // Mostrar mensaje flotante
+    function mostrarMensaje(texto, tipo) {
+        const mensajeDiv = document.createElement('div');
+        mensajeDiv.className = `alert alert-${tipo} alert-dismissible fade show`;
+        mensajeDiv.style.position = 'fixed';
+        mensajeDiv.style.top = '20px';
+        mensajeDiv.style.right = '20px';
+        mensajeDiv.style.zIndex = '9999';
+        mensajeDiv.innerHTML = `${texto}<button type="button" class="btn-close" data-bs-dismiss="alert"></button>`;
+        document.body.appendChild(mensajeDiv);
+        setTimeout(() => mensajeDiv.remove(), 5000);
+    }
+    
+    // Función para enviar datos
+    async function enviarDatos(datos, tipo) {
+        datos.tipo = tipo;
+        
+        try {
+            const response = await fetch(WEBHOOK_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(datos)
+            });
+            
+            mostrarMensaje('✅ ' + (tipo === 'orden' ? 'Pedido registrado' : tipo === 'reservacion' ? 'Reserva registrada' : 'Opinión enviada'), 'success');
+            
+        } catch(error) {
+            mostrarMensaje('❌ Error: ' + error.message, 'danger');
+        }
+    }
+    
+    // Calcular total automático
+    document.getElementById('producto')?.addEventListener('change', calcularTotal);
+    document.getElementById('cantidad')?.addEventListener('input', calcularTotal);
+    
+    function calcularTotal() {
+        const producto = document.getElementById('producto').value;
+        const cantidad = parseInt(document.getElementById('cantidad').value) || 0;
+        const total = precios[producto] * cantidad;
+        document.getElementById('total').value = total;
+    }
+    
+    // Enviar orden (con especificaciones)
+    document.getElementById('formOrden')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const datos = {
+            cliente: document.getElementById('clienteOrden').value,
+            producto: document.getElementById('producto').value,
+            cantidad: parseInt(document.getElementById('cantidad').value),
+            totalPagado: parseFloat(document.getElementById('total').value),
+            especificaciones: document.getElementById('especificaciones').value || "Sin especificaciones"
+        };
+        enviarDatos(datos, 'orden');
+        e.target.reset();
+        calcularTotal();
+    });
+    
+    // Enviar reservación (con notas especiales)
+    document.getElementById('formReserva')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const datos = {
+            cliente: document.getElementById('clienteReserva').value,
+            fechaReserva: document.getElementById('fechaReserva').value,
+            horaReserva: document.getElementById('horaReserva').value,
+            personas: parseInt(document.getElementById('personas').value),
+            telefono: document.getElementById('telefono').value,
+            notas: document.getElementById('notasReserva').value || "Sin notas adicionales"
+        };
+        enviarDatos(datos, 'reservacion');
+        e.target.reset();
+    });
+    
+    // Enviar opinión
+    document.getElementById('formOpinion')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const datos = {
+            cliente: document.getElementById('clienteOpinion').value,
+            puntaje: parseInt(document.getElementById('puntaje').value),
+            comentario: document.getElementById('comentario').value
+        };
+        enviarDatos(datos, 'opinion');
+        e.target.reset();
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
