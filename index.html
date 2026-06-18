@@ -10,6 +10,27 @@
         .alert { position: fixed; top: 20px; right: 20px; z-index: 9999; min-width: 300px; }
         .logo-img { max-height: 80px; width: auto; }
         .navbar-brand { font-size: 1.5rem; font-weight: bold; }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+        }
+        .video-container iframe,
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .tab-pane#como-lo-hicimos .card-body {
+            text-align: center;
+        }
+        .tab-pane#como-lo-hicimos h3 {
+            margin-bottom: 1.5rem;
+        }
     </style>
 </head>
 <body class="bg-light">
@@ -22,7 +43,7 @@
     <p class="lead">Órdenes y Reservaciones en Línea</p>
 </div>
     
-    <!-- Pestañas (SIN la de inversiones) -->
+    <!-- Pestañas (AGREGADA LA DE CÓMO LO HICIMOS) -->
     <ul class="nav nav-tabs mb-4 justify-content-center" id="myTab" role="tablist">
         <li class="nav-item">
             <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#ordenes">🛍️ Hacer Pedido</button>
@@ -32,6 +53,10 @@
         </li>
         <li class="nav-item">
             <button class="nav-link" data-bs-toggle="tab" data-bs-target="#opiniones">⭐ Dejar Opinión</button>
+        </li>
+        <!-- NUEVA PESTAÑA -->
+        <li class="nav-item">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#como-lo-hicimos">🎬 ¿Cómo lo hicimos?</button>
         </li>
     </ul>
     
@@ -147,9 +172,38 @@
                 </div>
             </div>
         </div>
+
+        <!-- ========== NUEVA PESTAÑA: ¿CÓMO LO HICIMOS? ========== -->
+        <!-- ========== NUEVA PESTAÑA: ¿CÓMO LO HICIMOS? ========== -->
+<div class="tab-pane fade" id="como-lo-hicimos">
+    <div class="card shadow">
+        <div class="card-body">
+            <h3>🎬 ¿Cómo lo hicimos?</h3>
+            <p class="text-muted mb-4">Mira el video donde explicamos el proceso de desarrollo de esta página web.</p>
+            
+            <!-- Video de YouTube -->
+            <div class="video-container">
+                <iframe 
+                    src="https://www.youtube.com/embed/tgjyh4sd7Ik" 
+                    title="Cómo hicimos esta página web"
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            
+            <div class="mt-4 text-start">
+                <h5>📋 Descripción del proceso:</h5>
+                <ul class="list-unstyled">
+                    <li>✅ Diseño responsive con Bootstrap</li>
+                    <li>✅ Formularios interactivos para pedidos y reservaciones</li>
+                    <li>✅ Integración con Google Sheets vía Webhook</li>
+                    <li>✅ Interfaz amigable y moderna</li>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
-
 <script>
     // 🔴 REEMPLAZA ESTA URL CON LA TUYA 🔴
     const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbw0_rrT4PdKFDlXemEbTp78KLvOb9pJlKePViAO-ku6GxVda7AibZdKtkxUDzwYiE5EgA/exec";
