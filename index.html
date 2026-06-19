@@ -25,11 +25,56 @@
             width: 100%;
             height: 100%;
         }
-        .tab-pane#como-lo-hicimos .card-body {
-            text-align: center;
+        
+        /* ===== ESTILOS DEL TICKET ===== */
+        .ticket {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-left: 5px solid #ff6b6b;
+            margin-top: 20px;
+            display: none;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            font-family: 'Courier New', monospace;
         }
-        .tab-pane#como-lo-hicimos h3 {
-            margin-bottom: 1.5rem;
+        .ticket-header {
+            text-align: center;
+            border-bottom: 2px dashed #ddd;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+        .ticket-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px dotted #eee;
+        }
+        .ticket-total {
+            font-weight: bold;
+            font-size: 1.2em;
+            border-top: 2px solid #333;
+            padding-top: 10px;
+            margin-top: 10px;
+            text-align: right;
+        }
+        .ticket-footer {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: #666;
+            border-top: 2px dashed #ddd;
+            padding-top: 10px;
+        }
+        .btn-imprimir {
+            margin-top: 10px;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
@@ -38,12 +83,12 @@
 <div class="container py-4">
     <!-- Logo y título -->
     <div class="text-center mb-4">
-    <div style="font-size: 80px;">🌮🍕🥤</div>
-    <h1 class="display-5 mt-2">Lonchería "Don Jugos"</h1>
-    <p class="lead">Órdenes y Reservaciones en Línea</p>
-</div>
+        <div style="font-size: 80px;">🌮🍕🥤</div>
+        <h1 class="display-5 mt-2">Lonchería "Don Jugos"</h1>
+        <p class="lead">Órdenes y Reservaciones en Línea</p>
+    </div>
     
-    <!-- Pestañas (AGREGADA LA DE CÓMO LO HICIMOS) -->
+    <!-- Pestañas -->
     <ul class="nav nav-tabs mb-4 justify-content-center" id="myTab" role="tablist">
         <li class="nav-item">
             <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#ordenes">🛍️ Hacer Pedido</button>
@@ -54,14 +99,13 @@
         <li class="nav-item">
             <button class="nav-link" data-bs-toggle="tab" data-bs-target="#opiniones">⭐ Dejar Opinión</button>
         </li>
-        <!-- NUEVA PESTAÑA -->
         <li class="nav-item">
             <button class="nav-link" data-bs-toggle="tab" data-bs-target="#como-lo-hicimos">🎬 ¿Cómo lo hicimos?</button>
         </li>
     </ul>
     
     <div class="tab-content">
-        <!-- ========== PESTAÑA ÓRDENES (con especificaciones) ========== -->
+        <!-- ========== PESTAÑA ÓRDENES ========== -->
         <div class="tab-pane fade show active" id="ordenes">
             <div class="card shadow">
                 <div class="card-body">
@@ -94,13 +138,15 @@
                                 <input type="number" id="total" class="form-control" readonly>
                             </div>
                             <div class="col-md-12 mb-3">
-                                <label>📝 Especificaciones del pedido (sin cebolla, bien cocido, en el caso de bebidas especifica el sabor deseado etc.)</label>
+                                <label>📝 Especificaciones del pedido</label>
                                 <textarea id="especificaciones" class="form-control" rows="2" placeholder="Ej: Sin cebolla, extra salsa, bien cocido..."></textarea>
                                 <small class="text-muted">Opcional: Escribe instrucciones especiales para tu pedido</small>
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary btn-lg w-100">✅ Realizar Pedido</button>
                     </form>
+                    
+                    <!-- El ticket se insertará aquí automáticamente -->
                 </div>
             </div>
         </div>
@@ -172,34 +218,33 @@
                 </div>
             </div>
         </div>
-
-        <!-- ========== NUEVA PESTAÑA: ¿CÓMO LO HICIMOS? ========== -->
-        <!-- ========== NUEVA PESTAÑA: ¿CÓMO LO HICIMOS? ========== -->
-<div class="tab-pane fade" id="como-lo-hicimos">
-    <div class="card shadow">
-        <div class="card-body">
-            <h3>🎬 ¿Cómo lo hicimos?</h3>
-            <p class="text-muted mb-4">Mira el video donde explicamos el proceso de desarrollo de esta página web.</p>
-            
-            <!-- Video de YouTube -->
-            <div class="video-container">
-                <iframe 
-                    src="https://www.youtube.com/embed/tgjyh4sd7Ik" 
-                    title="Cómo hicimos esta página web"
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen>
-                </iframe>
+        
+        <!-- ========== PESTAÑA ¿CÓMO LO HICIMOS? ========== -->
+        <div class="tab-pane fade" id="como-lo-hicimos">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h3>🎬 ¿Cómo lo hicimos?</h3>
+                    <p class="text-muted mb-4">Mira el video donde explicamos el proceso de desarrollo de esta página web.</p>
+                    
+                    <div class="video-container">
+                        <iframe 
+                            src="https://www.youtube.com/embed/tgjyh4sd7Ik" 
+                            title="Cómo hicimos esta página web"
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
             </div>
-            
         </div>
     </div>
 </div>
+
 <script>
-    // 🔴 REEMPLAZA ESTA URL CON LA TUYA 🔴
+    // ===== CONFIGURACIÓN =====
     const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbw0_rrT4PdKFDlXemEbTp78KLvOb9pJlKePViAO-ku6GxVda7AibZdKtkxUDzwYiE5EgA/exec";
     
-    // Precios de productos
     const precios = {
         "Jugos": 30,
         "Tortas": 45,
@@ -211,7 +256,7 @@
         "Hamburguesas": 50
     };
     
-    // Mostrar mensaje flotante
+    // ===== FUNCIONES PRINCIPALES =====
     function mostrarMensaje(texto, tipo) {
         const mensajeDiv = document.createElement('div');
         mensajeDiv.className = `alert alert-${tipo} alert-dismissible fade show`;
@@ -224,37 +269,127 @@
         setTimeout(() => mensajeDiv.remove(), 5000);
     }
     
-    // Función para enviar datos
     async function enviarDatos(datos, tipo) {
         datos.tipo = tipo;
-        
         try {
-            const response = await fetch(WEBHOOK_URL, {
+            await fetch(WEBHOOK_URL, {
                 method: 'POST',
                 mode: 'no-cors',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(datos)
             });
-            
             mostrarMensaje('✅ ' + (tipo === 'orden' ? 'Pedido registrado' : tipo === 'reservacion' ? 'Reserva registrada' : 'Opinión enviada'), 'success');
-            
         } catch(error) {
             mostrarMensaje('❌ Error: ' + error.message, 'danger');
         }
     }
     
-    // Calcular total automático
+    // ===== FUNCIÓN DEL TICKET =====
+    function mostrarTicket(datos) {
+        const fecha = new Date();
+        const fechaStr = fecha.toLocaleString('es-MX');
+        const numTicket = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+        
+        const precioUnitario = precios[datos.producto] || 0;
+        const subtotal = precioUnitario * datos.cantidad;
+        
+        const ticketHTML = `
+            <div class="ticket" id="ticketGenerado">
+                <div class="ticket-header">
+                    <h4>🧾 TICKET DE COMPRA</h4>
+                    <p style="margin:0; font-size:0.9em;">Lonchería "Don Jugos"</p>
+                    <p style="margin:0; font-size:0.8em; color:#666;">Ticket #${numTicket}</p>
+                    <p style="margin:0; font-size:0.8em; color:#666;">${fechaStr}</p>
+                </div>
+                
+                <div style="margin-bottom:10px;">
+                    <p style="margin:0;"><strong>Cliente:</strong> ${datos.cliente}</p>
+                </div>
+                
+                <div class="ticket-item">
+                    <span>${datos.producto}</span>
+                    <span>$${precioUnitario.toFixed(2)}</span>
+                </div>
+                <div class="ticket-item">
+                    <span>Cantidad: ${datos.cantidad}</span>
+                    <span>$${subtotal.toFixed(2)}</span>
+                </div>
+                
+                ${datos.especificaciones && datos.especificaciones !== "Sin especificaciones" ? `
+                <div style="margin:10px 0; padding:8px; background:#f8f9fa; border-radius:5px; font-size:0.9em;">
+                    <strong>📝 Especificaciones:</strong> ${datos.especificaciones}
+                </div>
+                ` : ''}
+                
+                <div class="ticket-total">
+                    TOTAL: $${subtotal.toFixed(2)}
+                </div>
+                
+                <div class="ticket-footer">
+                    ¡Gracias por tu compra! 🌮🍕🥤<br>
+                    <small>Este ticket es un comprobante de tu pedido.</small>
+                </div>
+                
+                <button onclick="imprimirTicket()" class="btn btn-secondary btn-sm btn-imprimir">
+                    🖨️ Imprimir Ticket
+                </button>
+            </div>
+        `;
+        
+        // Eliminar ticket anterior
+        const ticketAnterior = document.getElementById('ticketGenerado');
+        if (ticketAnterior) ticketAnterior.remove();
+        
+        // Insertar ticket
+        const formOrden = document.getElementById('formOrden');
+        formOrden.insertAdjacentHTML('afterend', ticketHTML);
+        
+        // Mostrar con animación
+        const ticket = document.getElementById('ticketGenerado');
+        ticket.style.display = 'block';
+        ticket.style.animation = 'fadeIn 0.5s';
+    }
+    
+    function imprimirTicket() {
+        const ticket = document.getElementById('ticketGenerado');
+        if (!ticket) return;
+        
+        const contenido = ticket.innerHTML;
+        const ventana = window.open('', '_blank');
+        ventana.document.write(`
+            <html>
+                <head>
+                    <title>Ticket de Compra</title>
+                    <style>
+                        body { font-family: 'Courier New', monospace; padding: 20px; }
+                        .ticket { max-width: 400px; margin: 0 auto; }
+                        ${document.querySelector('style').innerHTML}
+                    </style>
+                </head>
+                <body>
+                    <div class="ticket" style="display:block;">
+                        ${contenido}
+                    </div>
+                    <script>
+                        window.onload = function() { window.print(); }
+                    <\/script>
+                </body>
+            </html>
+        `);
+        ventana.document.close();
+    }
+    
+    // ===== CALCULAR TOTAL =====
     document.getElementById('producto')?.addEventListener('change', calcularTotal);
     document.getElementById('cantidad')?.addEventListener('input', calcularTotal);
     
     function calcularTotal() {
         const producto = document.getElementById('producto').value;
         const cantidad = parseInt(document.getElementById('cantidad').value) || 0;
-        const total = precios[producto] * cantidad;
-        document.getElementById('total').value = total;
+        document.getElementById('total').value = (precios[producto] * cantidad) || 0;
     }
     
-    // Enviar orden (con especificaciones)
+    // ===== ENVIAR FORMULARIO DE ÓRDENES =====
     document.getElementById('formOrden')?.addEventListener('submit', (e) => {
         e.preventDefault();
         const datos = {
@@ -265,11 +400,12 @@
             especificaciones: document.getElementById('especificaciones').value || "Sin especificaciones"
         };
         enviarDatos(datos, 'orden');
+        mostrarTicket(datos); // <-- Aquí se genera el ticket
         e.target.reset();
         calcularTotal();
     });
     
-    // Enviar reservación (con notas especiales)
+    // ===== ENVIAR RESERVACIONES =====
     document.getElementById('formReserva')?.addEventListener('submit', (e) => {
         e.preventDefault();
         const datos = {
@@ -284,7 +420,7 @@
         e.target.reset();
     });
     
-    // Enviar opinión
+    // ===== ENVIAR OPINIONES =====
     document.getElementById('formOpinion')?.addEventListener('submit', (e) => {
         e.preventDefault();
         const datos = {
